@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Retro Videoclub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🎬 Retro Videoclub</h1>
+
+    <h2>📽️ Lista de Películas</h2>
+    <ul>
+      {% for movie in movies %}
+        <li>
+          <strong>{{ movie.title }}</strong>
+          <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">[Ver]</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <hr>
+    <h2>➕ Añadir Película Nueva</h2>
+    <form action="{{ url_for('add_movie') }}" method="POST">
+      <input type="text" name="title" placeholder="Título" required />
+      <textarea name="description" placeholder="Descripción" required></textarea>
+      <button type="submit">Guardar 🎞️</button>
+    </form>
+  </div>
+</body>
+</html>
