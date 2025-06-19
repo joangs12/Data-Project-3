@@ -17,6 +17,10 @@ resource "aws_lambda_function" "getelement_function" {
   source_code_hash = data.archive_file.function_zip.output_base64sha256
 
   role = aws_iam_role.iam_for_lambda.arn
+  vpc_config {
+    security_group_ids = [var.lambda_sg_id]
+    subnet_ids         = [var.private_subnet_a, var.private_subnet_b]
+  }
 
 }
 
@@ -44,3 +48,7 @@ resource "aws_iam_role" "iam_for_lambda" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
+resource "aws_iam_role_policy_attachment" "lambda_vpc_access" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}
