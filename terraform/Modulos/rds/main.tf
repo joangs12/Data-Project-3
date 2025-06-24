@@ -1,5 +1,6 @@
 resource "aws_db_instance" "postgres-db-instance" {
   allocated_storage    = 20
+  db_name = "postgresdb"
   db_subnet_group_name = var.subnet_group_name
   engine               = "postgres"
   engine_version       = "16.3"

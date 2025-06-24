@@ -3,6 +3,11 @@ module "lambdas_functions" {
   lambda_sg_id     = module.vpc_sg.lambda_sg_id
   private_subnet_a = module.vpc_sg.private_subnet_a
   private_subnet_b = module.vpc_sg.private_subnet_b
+  db_host          = module.rds_instance.db_host
+  db_port          = module.rds_instance.db_port
+  db_name          = module.rds_instance.db_name
+  db_user          = module.rds_instance.db_user
+  db_password      = var.db_password
 }
 
 module "rds_instance" {
