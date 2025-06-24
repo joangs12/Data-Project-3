@@ -10,7 +10,7 @@ locals {
 resource "aws_lambda_function" "getelement_function" {
   function_name = local.function_name
   timeout       = 5 # seconds
-  image_uri = "859043920908.dkr.ecr.eu-central-1.amazonaws.com/repo-dp3@sha256:610b37ffb7ca57c3043c61edff079bd2f8d2b960c86cb690686aa2bcedb9bb22"
+  image_uri = ""
   package_type  = "Image"
 
   role = aws_iam_role.iam_for_lambda.arn
