@@ -9,9 +9,9 @@ resource "google_artifact_registry_repository" "repo-dp3" {
 resource "null_resource" "docker_build" {
   provisioner "local-exec" {
     command = <<EOL
-      docker build --platform linux/amd64 -t api D:\EDEM\CLOUD\Data-Project-3\my_app\backend
-      docker tag api europe-southwest1-docker.pkg.dev/flowing-scholar-463011-d0/flowing-scholar-463011-d0-repo:latest
-      docker push europe-southwest1-docker.pkg.dev/flowing-scholar-463011-d0/flowing-scholar-463011-d0-repo:latest
+      docker build --platform linux/amd64 -t api "D:\EDEM\CLOUD\Data-Project-3\my_app\backend"
+      docker tag api europe-southwest1-docker.pkg.dev/flowing-scholar-463011-d0/flowing-scholar-463011-d0-repo/api:latest
+      docker push europe-southwest1-docker.pkg.dev/flowing-scholar-463011-d0/flowing-scholar-463011-d0-repo/api:latest
     EOL
   }
 }
@@ -38,7 +38,7 @@ resource "google_cloud_run_service" "default" {
   depends_on = [null_resource.docker_build]
 }
 
-resource "null_resource" "allow_unauthenticated_access_api" {
+resource "null_resource" "access_api" {
   provisioner "local-exec" {
     command = <<EOL
       gcloud run services add-iam-policy-binding api-service --region=europe-southwest1 --member="allUsers" --role="roles/run.invoker" --project=flowing-scholar-463011-d0

@@ -5,17 +5,6 @@ provider "google" {
   
 }
 
-# resource "google_service_account" "bigquery_sa" {
-#   account_id   = "bigquery-sa"
-#   display_name = "BigQuery Service Account"
-#   project      = var.project_id
-# }
-
-# resource "google_project_iam_member" "bigquery_sa_member" {
-#   project = var.project_id
-#   role    = "roles/bigquery.admin"
-#   member  = "serviceAccount:${google_service_account.bigquery_sa.email}"
-# }
 
 resource "google_bigquery_dataset" "emergencia-eventos" {
   dataset_id  = "moviesdb"
@@ -29,15 +18,9 @@ resource "google_bigquery_table" "emergencias" {
 
   schema = <<EOF
 [
-  {"name": "id", "type": "INTEGER", "mode": "REQUIRED"},
   {"name": "title", "type": "STRING", "mode": "REQUIRED"},
-  {"name": "director", "type": "STRING"},
   {"name": "genre", "type": "STRING"},
   {"name": "release_year", "type": "INTEGER"},
-  {"name": "duration_minutes", "type": "INTEGER"},
-  {"name": "rating", "type": "STRING"},
-  {"name": "available", "type": "BOOLEAN"},
-  {"name": "created_at", "type": "TIMESTAMP"}
 ]
 EOF
 }

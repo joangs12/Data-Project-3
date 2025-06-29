@@ -1,13 +1,17 @@
 
-# module "BigQuery" {
-#   source = "./Modulos/BigQuery"
+module "BigQuery" {
+  source = "./Modulos/BigQuery"
   
-# }
+}
 
-# module "Datastream" {
-#   source = "./Modulos/Datastream"
-  
-# }
+module "Datastream" {
+  source = "./Modulos/Datastream"
+  db_password = module.rds_instance.db_password
+  db_username = module.rds_instance.db_user
+  db_name     = module.rds_instance.db_name
+  datastream_username = var.datastream_username
+  datastream_password = var.datastream_password 
+}
 
 module "getelement" {
   source           = "./AWS/Modulos/lambda_function"
