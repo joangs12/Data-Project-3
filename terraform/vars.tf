@@ -15,3 +15,13 @@ variable "db_password" {
   description = "The password for the database user"
   type        = string
 }
+
+variable "datastream_username" {
+  description = "The username for the datastream"
+  type        = string
+}
+
+variable "datastream_password" {
+  description = "The password for the datastream"
+  type        = string
+}
